@@ -33,13 +33,13 @@ app.get('/api/notes', function(req,res){
 app.post("/api/notes", function(req,res){
     const note = req.body;
     readFileAsync("./db/db.json", "utfa8").then(function(data){
-        const note = [].concat(json.parse(data));
-        note.ide = notes.length + 1
+        const notes = [].concat(json.parse(data));
+        note.id = notes.length + 1
         notes.push(note);
         return notes
     }).then(function(notes){
         writeFileAsync("./db/db.json", JSON.stringify(notes));
-        res.json(note);
+        res.json(notes);
     })
 });
 
