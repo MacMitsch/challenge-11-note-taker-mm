@@ -20,10 +20,47 @@ app.use(express.json());
 app.use(express.static(folderpath));
 
     // API Routes
-    // Get Request
+    // GET Request
 app.get('/api/notes', function(req,res){
     readFileAsync('./db/db.json', "utf8").then(function(data){
         notes = [].concat(JSON.parse(data))
         res.json(notes);
     })
+});
+
+    // POST Request/ Target 
+
+app.post("/api/notes", function(req,res){
+    const note = req.body;
+    readFileAsync("./db/db.json", "utfa8").then(function(data){
+        const note = [].concat(json.parse(data));
+        note.ide = notes.length + 1
+        notes.push(note);
+        return notes
+    }).then(function(notes){
+        writeFileAsync("./db/db.json", JSON.stringify(notes));
+        res.json(note);
+    })
+});
+
+    // Delete Request
+app.delete("/api/notes/:id", function(req,res){
+    const idDelete= parseInt(req.params.id);
+    readFileAsync("./db/db.json", "utf8").then(function(data){
+        const notes = [].concat(JSON.parse(data));
+        const newNoteData = []
+        for(let i = 0; i<notes.length; i++) {
+            if(idDelete !== notes[i].id) {
+                newNoteData.push(notes[i])
+            }
+        }
+        return newNoteData
+    }) .then(function(notes){
+        writeFileAsync("./db/db/json", JSON.stringify(notes))
+        res.send('Success');
+    })
+})
+
+app.listen(PORT, function(){
+    console.log("App is working" + PORT);
 });
