@@ -44,6 +44,7 @@ app.post("/api/notes", function(req,res){
 });
 
     // Delete Request
+
 app.delete("/api/notes/:id", function(req,res){
     const idDelete= parseInt(req.params.id);
     readFileAsync("./db/db.json", "utf8").then(function(data){
@@ -60,6 +61,19 @@ app.delete("/api/notes/:id", function(req,res){
         res.send('Success');
     })
 })
+
+    // HTML Routing
+app.get("/notes", function(req,res){
+    res.sendFile(path.join(__dirname, "./public/notes.html"));
+});
+app.get("/", function(req, res){
+    res.sendFile(path.join(__dirname, "./public/index.html"));
+});
+app.get("*", function(req, res){
+    res.sendFile(path.join(__dirname,"./public/index.html"));
+});
+
+    // Listen
 
 app.listen(PORT, function(){
     console.log("App is working" + PORT);
