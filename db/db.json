@@ -1,8 +1,1 @@
-{
-    "notes":[
-        {
-            "title": "Welcome to Note Taker.",
-            "text": "Your one stop when it comes to creating new notes and deleting old ones.",
-        }
-    ]
-}
+[{"title":"This is a test title", "text":"this is a test text", "id":}]
