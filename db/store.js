@@ -6,7 +6,7 @@ const { parse } = require("path");
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
 
-class Storage{
+class Store{
     read(){
         return readFileAsync("db/db.json", "utf8")
     }
