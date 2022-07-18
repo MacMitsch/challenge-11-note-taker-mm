@@ -27,16 +27,16 @@ console.log("made it past store")
         .then(updatedNotes => this.write(updatedNotes))
         .then(() => this.newNote)
     }
-    getNotes() {
+    getNotes() { console.log("get notes initiated")
         return this.read()
         .then(notes => {
             return JSON.parse(notes)||[];
         })
-        console.log("got notes") }
+        }
 
     
 
-    deleteNote(id) {
+    deleteNote(id) { console.log("delete notes")
         return this.getNotes()
         .then(notes => notes.filter(note => note.id !==id))
         .then(keptNotes => this.write(keptNotes))
