@@ -1,27 +1,27 @@
-const router = require("express").Router();
-const store = require("../db/store");
+const router = require('express').Router();
+const { createNewNote, deleteNote } = require('../db/db.json');
+let { notesArray } = require('../db/db.json');
 
-
-router.get("/api/notes", function(req, res) {
-  store
-    .getNotes()
-    .then(notes => res.json(notes))
-    .catch(err => res.status(500).json(err));
+// get
+router.get('/notes', (req, res) => {
+  let results = notesArray;
+  res.json(results);
 });
 
-router.post("/api/notes", (req, res) => {
-  store
-    .addNote(req.body)
-    .then((note) => res.json(note))
-    .catch(err => res.status(500).json(err));
+router.post('/notes', (req, res) => {
+  // set id 
+  if(notesArray){
+  req.body.id = notesArray.length.toString();
+  } else 
+  {req.body.id = 0}
+  res.json(createNewNote(req.body, notesArray));
 });
 
-
-router.delete("/notes/:id", function(req, res) {
-  store
-    .removeNote(req.params.id)
-    .then(() => res.json({ ok: true }))
-    .catch(err => res.status(500).json(err));
+// Route
+router.delete('/notes/:id', async (req, res) => {
+  const { id } = req.params
+  notesArray = await deleteNote(id, notesArray);
+  res.json(notesArray);
 });
 
 module.exports = router;
