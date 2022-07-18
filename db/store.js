@@ -21,21 +21,21 @@ class Store{
     getNotes() {
         return this.read()
         .then(notes => {
-            let parsedNotes;
-            try{ parsedNotes = [].concat(JSON.parse(notes));
-            } catch (err) { parsedNotes =[];
+            let dataNotes;
+            try{ dataNotes = [].concat(JSON.parse(notes));
+            } catch (err) { dataNotes =[];
             }
-            return parsedNotes
+            return dataNotes
         });
     }
 
     addNote(note){
-        console.log("made it past store")
+        
         const { title, text } = note
         if(!title|| !text){
             throw new Error("error please fill title and text.")
         }
-        const newNote = {title,text,id:uuidv4()}
+        const newNote = {title,text,id: ++this.lastId()};
         
 
 
@@ -47,10 +47,10 @@ class Store{
 
     
 
-    deleteNote(id) { console.log("delete notes")
+    deleteNote(id) {
         return this.getNotes()
         .then(notes => notes.filter(note => note.id !==id))
-        .then(keptNotes => this.write(keptNotes))
+        .then(filteredNotes => this.write(filteredNotes))
         console.log("delete note")  }
 }
 
