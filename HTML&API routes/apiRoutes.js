@@ -22,7 +22,7 @@ router.post("/notes", (req,res)=>{
         res.json(note)
     })
     .catch(err => {
-        res.status(400).json(err)
+        res.status(500).json(err)
     })
 })
     // Delete Note
@@ -31,6 +31,6 @@ router.delete("/notes/:id", (req,res)=>{
     store
     .removeNote(req.params.id)
     .then(()=> res.json({ok:true}))
-    .catch(err => res.status(400).json(err))
+    .catch(err => res.status(300).json(err))
 })
 module.exports = router;
