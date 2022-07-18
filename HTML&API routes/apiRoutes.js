@@ -2,29 +2,25 @@ const router = require("express").Router();
 const store = require("../db/store");
 
     // existing notes request
-router.get("/notes", (req,res)=>{
+router.get("/notes", function (req,res){
     store
     .getNotes()
-    .then(notes =>{
-        res.json(notes)
+    .then(notes =>{ res.json(notes)
     })
     .catch(err => {
-        res.status(400).json(err)
+        res.status(300).json(err)
     })
 })
     // Posting new note
 
-router.post("/notes", (req,res)=>{
-    console.log(req.body)
+router.post("/notes", function (req,res){
     store
     .addNote(req.body)
-    .then(note =>{
-        res.json(note)
-    })
+    .then((note =>
+        res.json(note))
     .catch(err => {
-        res.status(500).json(err)
-    })
-})
+        res.status(500).json(err));
+    });
     // Delete Note
 
 router.delete("/notes/:id", (req,res)=>{
