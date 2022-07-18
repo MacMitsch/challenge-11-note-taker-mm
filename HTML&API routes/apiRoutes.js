@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { createNewNote, deleteNote } = require('../db/db.json');
+const { create, deleteNote } = require('../db/db.json');
 let { noteArray } = require('../db/db.json');
 
 // get
@@ -14,7 +14,7 @@ router.post('/notes', (req, res) => {
   req.body.id = noteArray.length.toString();
   } else 
   {req.body.id = 0}
-  res.json(createNewNote(req.body, noteArray));
+  res.json(create(req.body, noteArray));
 });
 
 // Route
