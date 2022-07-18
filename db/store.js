@@ -19,6 +19,8 @@ class Store{
             throw new Error("error please fill title and text.")
         }
         const newNote = {title,text,id:uuidv4()}
+        
+console.log("made it past store")
 
         return this.getNotes()
         .then(notes => [...notes, newNote])
@@ -30,12 +32,15 @@ class Store{
         .then(notes => {
             return JSON.parse(notes)||[];
         })
-    }
+        console.log("got notes") }
+
+    
+
     deleteNote(id) {
         return this.getNotes()
         .then(notes => notes.filter(note => note.id !==id))
         .then(keptNotes => this.write(keptNotes))
-    }
+        console.log("delete note")  }
 }
 
 module.exports = new Store();
