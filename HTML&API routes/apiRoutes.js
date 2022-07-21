@@ -3,25 +3,25 @@ const { create, deleteNote } = require('../db/db.json');
 let { noteArray } = require('../db/db.json');
 
 // get
-router.get('/notes', (req, res) => {
-  let results = noteArray;
-  res.json(results);
+router.get("/notes", (req, res) => {
+ store
+  .getNotes()
+  .then(notes => res.json(notes))
+  .catch(err => res.status(500).json(err))
 });
 
 router.post('/notes', (req, res) => {
   // set id 
-  if(notesArray){
-  req.body.id = noteArray.length.toString();
-  } else 
-  {req.body.id = 0}
-  res.json(create(req.body, noteArray));
+  store
+    .addNote(req,body)
+    .then((notes) => res.status(500).json(err))
 });
 
 // Route
-router.delete('/notes/:id', async (req, res) => {
-  const { id } = req.params
-  noteArray = await deleteNote(id, noteArray);
-  res.json(noteArray);
+router.delete('/notes/:id', (req, res) => {
+  store
+    .deleteNote(req.params.title)
+    .then(()=> res.json({ok:true}))
 });
 
 module.exports = router;

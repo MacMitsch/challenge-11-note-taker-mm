@@ -11,5 +11,5 @@ app.use("/api", apiRoutes);
 app.use("/", htmlRoutes);
 
 app.listen(PORT,()=>{
-    console.log(`${PORT} is up and running`);
+    console.log(`localhost:${PORT} is up and running`);
 });
