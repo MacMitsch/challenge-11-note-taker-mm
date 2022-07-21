@@ -1,7 +1,11 @@
+
 const express = require("express");
+
 const htmlRoutes = require("./HTML&API routes/htmlRoutes");
 const apiRoutes = require("./HTML&API routes/apiRoutes");
+
 const app = express();
+
 const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
